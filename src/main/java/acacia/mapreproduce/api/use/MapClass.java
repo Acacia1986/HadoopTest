@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
  * Created by miaomiao on 6/12/2017.
  */
 public class MapClass extends Mapper<LongWritable, Text,Text,IntWritable> {
-    private final static IntWritable intwriteable = new IntWritable();
+    private final static IntWritable intwriteable = new IntWritable(1);
     private Text text = new Text();
 
     @Override

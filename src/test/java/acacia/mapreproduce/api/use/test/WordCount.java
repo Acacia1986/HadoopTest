@@ -20,11 +20,7 @@ import org.apache.hadoop.util.ToolRunner;
  * Created by miaomiao on 6/12/2017.
  */
 public class WordCount extends Configured implements Tool {
-    public static void main(String[] args) throws Exception {
-        //System.setProperty("hadoop.home.dir", "E:\\Hadoop\\hadoop-2.6.0\\hadoop-2.6.0\\");
-        int exitCode = ToolRunner.run(new WordCount(),args);
-        System.exit(exitCode);
-    }
+
 
     public  int run(String[] strings) throws Exception {
         if (strings.length !=2) {
@@ -33,13 +29,9 @@ public class WordCount extends Configured implements Tool {
         }
         Configuration conf = new Configuration();
         Job job = new Job(conf);
-        conf.set("mapred.job.tracker","bej301748.cn.oracle.com:50070");
-        conf.set("fs.default.name","bej301748.cn.oracle.com:50070");
         job.setJarByClass(WordCount.class);
         job.setJobName("WordCountForAcacia");
-//        JobConf jobConf = new JobConf(new Configuration(),WordCount.class);
-//        jobConf.setJarByClass(WordCount.class);
-//        jobConf.setJobName("WordCountForAcacia");
+
 
         FileInputFormat.addInputPath(job,new Path(strings[0]));
         FileOutputFormat.setOutputPath(job,new Path(strings[1]));
@@ -58,5 +50,13 @@ public class WordCount extends Configured implements Tool {
             System.out.println("Job was not successful!");
         }
         return  returnValue;
+    }
+
+
+    public static void main(String[] args) throws Exception {
+        System.setProperty("hadoop.home.dir", "D:\\Hadoop27\\hadoop-2.7.1");
+        System.setProperty("hadoop.home","D:\\Hadoop27\\hadoop-2.7.1");
+        int exitCode = ToolRunner.run(new WordCount(),args);
+        System.exit(exitCode);
     }
 }
